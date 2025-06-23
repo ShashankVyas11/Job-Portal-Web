@@ -11,8 +11,8 @@ import random
 import requests
 from app.email_utils import send_email
 
-ADZUNA_APP_ID = "93be59b3"
-ADZUNA_APP_KEY = "87cb250175be4b81c9d71dde938da6d9"
+ADZUNA_APP_ID = os.getenv("ADZUNA_APP_ID")
+ADZUNA_APP_KEY = os.getenv("ADZUNA_APP_KEY")
 
 def fetch_api_jobs(keyword, location, industry):
     url = f"https://api.adzuna.com/v1/api/jobs/in/search/1"
