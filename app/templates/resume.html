@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Resume Page Banner -->
+<section class="py-5 text-center postcv-banner text-white">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Resume Preview</h1>
+    <p class="lead">You can view or download your resume below</p>
+  </div>
+</section>
+
+<!-- Resume Viewer -->
+<div class="container mt-5 text-center">
+  {% if cv %}
+    <iframe 
+      src="{{ url_for('static', filename='resume/' + cv) }}" 
+      width="100%" 
+      height="600px" 
+      style="border: 2px solid #ccc; border-radius: 10px;">
+    </iframe>
+
+    <!-- Download Button -->
+    <div class="mt-4">
+      <a href="{{ url_for('download_resume', filename=cv) }}" class="btn btn-success">
+        Download Resume
+      </a>
+    </div>
+  {% else %}
+    <p class="text-danger">Resume file not found or not uploaded.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

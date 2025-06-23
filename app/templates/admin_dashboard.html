@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+  <h2 class="text-center mb-4">Admin Control Panel</h2>
+
+  <div class="row mb-5">
+    <!-- Job Seekers -->
+    <div class="col-md-6">
+      <div class="card shadow p-3 mb-3">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Job Seekers</h5>
+        </div>
+        <div class="card-body">
+          {% if job_seekers %}
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in job_seekers %}
+                <tr>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>
+                    <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>No job seekers registered yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Companies -->
+    <div class="col-md-6">
+      <div class="card shadow p-3 mb-3">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Companies</h5>
+        </div>
+        <div class="card-body">
+          {% if companies %}
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for company in companies %}
+                <tr>
+                  <td>{{ company.username }}</td>
+                  <td>{{ company.email }}</td>
+                  <td>
+                    <form method="POST" action="{{ url_for('delete_user', user_id=company.id) }}">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>No companies registered yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Posted Jobs -->
+  <div class="card shadow p-3 mb-5">
+    <div class="card-header bg-info text-white">
+      <h5 class="mb-0">Posted Jobs</h5>
+    </div>
+    <div class="card-body">
+      {% if jobs %}
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Industry</th>
+              <th>Description</th>
+              <th>Posted By</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for job in jobs %}
+            <tr>
+              <td>{{ job.title }}</td>
+              <td>{{ job.industry }}</td>
+              <td>{{ job.description }}</td>
+              <td>{{ job.company.username }}</td>
+              <td>
+                <form method="POST" action="{{ url_for('delete_job', job_id=job.id) }}">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No jobs posted yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

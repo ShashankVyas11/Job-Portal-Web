@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Post CV Banner -->
+<section class="py-5 text-center postcv-banner text-white">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Showcase Your Talent</h1>
+    <p class="lead">Upload your resume and let opportunities find you. AI will do the matchmaking.</p>
+  </div>
+</section>
+
+<br>
+<div class="content-section">
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row mb-2">
+      <!-- Left Panel: Form Fields -->
+      <div class="col-md-8">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Input Details</strong>
+
+            <!-- Gender -->
+            <div class="form-group">
+              {{ form.gender.label(class="form-control-label") }}
+              {% if form.gender.errors %}
+                {{ form.gender(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.gender.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+              {% else %}
+                {{ form.gender(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <br>
+
+            <!-- Degree -->
+            <div class="form-group">
+              {{ form.degree.label(class="form-control-label") }}
+              {% if form.degree.errors %}
+                {{ form.degree(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.degree.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+              {% else %}
+                {{ form.degree(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <br>
+
+            <!-- Industry -->
+            <div class="form-group">
+              {{ form.industry.label(class="form-control-label") }}
+              {% if form.industry.errors %}
+                {{ form.industry(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.industry.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+              {% else %}
+                {{ form.industry(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <br>
+
+            <!-- Experience -->
+            <div class="form-group">
+              {{ form.experience.label(class="form-control-label") }}
+              {% if form.experience.errors %}
+                {{ form.experience(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.experience.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+              {% else %}
+                {{ form.experience(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Resume Upload -->
+      <div class="col-md-4">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-success">Upload Resume</strong>
+
+            <!-- Resume File -->
+            <div class="form-group">
+              {{ form.cv.label() }}
+              {{ form.cv(class="form-control-file") }}
+              {% if form.cv.errors %}
+                {% for error in form.cv.errors %}
+                  <span class="text-danger">{{ error }}</span><br>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <br>
+
+            <!-- Cover Letter -->
+            <div class="form-group">
+              {{ form.cover_letter.label(class="form-control-label") }}
+              {% if form.cover_letter.errors %}
+                {{ form.cover_letter(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.cover_letter.errors %}<span>{{ error }}</span>{% endfor %}
+                </div>
+              {% else %}
+                {{ form.cover_letter(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col text-center">
+      {{ form.submit(class="btn btn-primary mb-2") }}
+    </div>
+  </form>
+</div>
+
+{% endblock %}

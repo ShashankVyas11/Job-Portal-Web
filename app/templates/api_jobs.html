@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="container py-5">
+  <h2>Browse Jobs from Adzuna</h2>
+  <form method="get" class="row g-3 mb-4">
+    <input name="keyword" placeholder="Keyword" class="form-control col-md-4" value="{{ request.args.keyword }}">
+    <input name="location" placeholder="Location" class="form-control col-md-4" value="{{ request.args.location }}">
+    <input name="industry" placeholder="Industry" class="form-control col-md-3" value="{{ request.args.industry }}">
+    <button class="btn btn-primary col-md-1">Search</button>
+  </form>
+  
+  <div class="row">
+    {% for job in jobs %}
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column">
+            <h5>{{ job.title }}</h5>
+            <p>{{ job.company.display_name }} • {{ job.location.display_name }}</p>
+            <p class="mb-2">{{ job.salary_min }}–{{ job.salary_max }}</p>
+            <p class="text-muted">{{ job.description[:120] }}...</p>
+            <a href="{{ job.redirect_url }}" target="_blank" class="btn btn-outline-success mt-auto">View/Apply</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

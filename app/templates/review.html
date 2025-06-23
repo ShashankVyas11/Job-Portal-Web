@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Review Banner -->
+<section class="py-5 text-center review-banner text-white">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Share Your Experience</h1>
+    <p class="lead">Your voice drives innovation. Shape the future of AI hiring with your story.</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="shadow p-4 rounded bg-white">
+          <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+              <legend class="mb-4 text-center">Add a Review</legend>
+
+              <!-- Username -->
+              <div class="form-group mb-3">
+                {{ form.username.label(class="form-control-label") }}
+                {{ form.username(class="form-control form-control-lg" + (' is-invalid' if form.username.errors else '')) }}
+                {% for error in form.username.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <!-- Review -->
+              <div class="form-group mb-3">
+                {{ form.review.label(class="form-control-label") }}
+                {{ form.review(class="form-control form-control-lg" + (' is-invalid' if form.review.errors else '')) }}
+                {% for error in form.review.errors %}
+                  <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+              </div>
+
+              <div class="text-center">
+                {{ form.submit(class="btn btn-outline-info") }}
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

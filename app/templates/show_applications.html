@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Applications Page Banner -->
+<section class="py-5 text-center apps-banner text-white">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Applications You've Received</h1>
+    <p class="lead">View candidate profiles powered by intelligent matching.</p>
+  </div>
+</section>
+
+<section class="container mt-5">
+  <div class="row">
+    {% for application in applications %}
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 h-100">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title mb-2">👤 Applicant: {{ application.application_submiter.username }}</h5>
+          <p><strong>Email:</strong> {{ application.application_submiter.email }}</p>
+          <p><strong>Degree:</strong> {{ application.degree[1:] }}</p>
+          <p><strong>Industry:</strong> {{ application.industry }}</p>
+          <p><strong>Experience:</strong> {{ application.experience }} years</p>
+          <p><strong>Date:</strong> {{ application.date_posted.strftime('%Y-%m-%d') }}</p>
+          <p><strong>Status:</strong>
+            {% if application.status == 'Rejected' %}
+              <span class="badge bg-danger">Rejected</span>
+            {% else %}
+              <span class="badge bg-success">Submitted</span>
+            {% endif %}
+          </p>
+          <p><strong>Cover Letter:</strong><br>{{ application.cover_letter }}</p>
+
+          <!-- View Resume & Reject - Side by Side -->
+          <div class="row g-2 my-3">
+            <div class="col-6">
+              <a href="{{ url_for('resume', id=application.id) }}" class="btn btn-outline-primary w-100">View Resume</a>
+            </div>
+            {% if application.status != 'Rejected' %}
+            <div class="col-6">
+              <form method="POST" action="{{ url_for('reject_application', application_id=application.id) }}">
+                <button type="submit" class="btn btn-outline-warning w-100">Reject</button>
+              </form>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Delete Button - Full Width -->
+          <form method="POST" action="{{ url_for('delete_application', application_id=application.id) }}">
+            <button type="submit" class="btn btn-outline-danger w-100">Delete</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

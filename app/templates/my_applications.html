@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="container mt-5">
+  <h2 class="mb-4">My Applications</h2>
+  <div class="row">
+    {% for app in applications %}
+    <div class="col-md-6 mb-4">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">{{ app.application_jober.title }}</h5>
+          <p class="card-text">Industry: {{ app.industry }}</p>
+          <p class="card-text">Experience: {{ app.experience }} years</p>
+          <p class="card-text">Applied On: {{ app.date_posted }}</p>
+          <p class="card-text">Status: 
+            {% if app.status == "Rejected" %}
+              <span class="badge bg-danger">Rejected</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ app.status }}</span>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

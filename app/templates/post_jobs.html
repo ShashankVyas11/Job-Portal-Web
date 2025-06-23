@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<!-- Post Job Banner -->
+<section class="py-5 text-center postjob-banner text-white">
+  <div class="container">
+    <h1 class="display-5 fw-bold">Post a Job Opening</h1>
+    <p class="lead">Reach the right talent pool using AI-powered job discovery. Your next hire is just one post away.</p>
+  </div>
+</section>
+
+<!-- Job Form Section -->
+<div class="content-section py-5 bg-light">
+  <div class="container">
+    <form method="POST" action="">
+      {{ form.hidden_tag() }}
+      <div class="row">
+        <div class="col-md-10 mx-auto shadow p-5 bg-white rounded-3">
+          <h4 class="text-primary mb-4">Enter Job Details</h4>
+
+          <!-- Job Title -->
+          <div class="mb-3">
+            {{ form.title.label(class="form-label fw-bold") }}
+            {{ form.title(class="form-control form-control-lg" + (' is-invalid' if form.title.errors else ''), placeholder="e.g., Software Engineer", maxlength="100", autofocus=True) }}
+            {% for error in form.title.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Industry Dropdown -->
+          <div class="mb-3">
+            {{ form.industry.label(class="form-label fw-bold") }}
+            {{ form.industry(class="form-select form-select-lg" + (' is-invalid' if form.industry.errors else '')) }}
+            {% for error in form.industry.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Location Dropdown -->
+          <div class="mb-3">
+            {{ form.location.label(class="form-label fw-bold") }}
+            {{ form.location(class="form-select form-select-lg" + (' is-invalid' if form.location.errors else '')) }}
+            {% for error in form.location.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Salary -->
+          <div class="mb-3">
+            {{ form.salary.label(class="form-label fw-bold") }}
+            {{ form.salary(class="form-control form-control-lg" + (' is-invalid' if form.salary.errors else ''), placeholder="e.g., 80000") }}
+            {% for error in form.salary.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            {{ form.description.label(class="form-label fw-bold") }}
+            {{ form.description(class="form-control form-control-lg" + (' is-invalid' if form.description.errors else ''), rows="5", placeholder="Describe the job role, responsibilities, qualifications...") }}
+            {% for error in form.description.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center mt-4">
+            {{ form.submit(class="btn btn-primary px-5 py-2 fs-5") }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
