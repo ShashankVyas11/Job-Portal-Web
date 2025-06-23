@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: job-portal
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    envVars:
+      - key: SECRET_KEY
+        value: f0c23d880346d1ef4f61655511699260  # ✅ Or set manually in Render dashboard
