@@ -53,7 +53,10 @@
       <div class="card shadow h-100">
         <div class="card-body d-flex flex-column">
           <h5 class="card-title">{{ job.title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Industry: {{ job.industry }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <strong>Company:</strong> {{ job.company.username }}<br>
+            <strong>Industry:</strong> {{ job.industry }}
+          </h6>
           <p class="mb-1"><strong>Location:</strong> {{ job.location }}</p>
           <p class="mb-1"><strong>Salary:</strong> {{ job.salary or 'Not disclosed' }}</p>
           <p class="card-text">{{ job.description[:100] }}{% if job.description|length > 100 %}...{% endif %}</p>
@@ -69,7 +72,6 @@
           {% elif current_user.is_authenticated and current_user.usertype == 'Job Seeker' %}
             <a href="{{ url_for('post_cvs', jobid=job.id) }}" class="btn btn-success w-100">Apply</a>
           {% endif %}
-
         </div>
       </div>
     </div>
